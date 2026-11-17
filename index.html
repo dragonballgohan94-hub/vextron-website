@@ -1,0 +1,637 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXTRON | Intelligent Automation</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg:#070914;
+  --panel:#101629;
+  --cyan:#00f5ff;
+  --purple:#a855f7;
+  --pink:#ff3cac;
+  --green:#39ff9c;
+  --red:#ff4566;
+  --muted:#8b9bb4;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  background:var(--bg);
+  color:#eef5ff;
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
+body:before {
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(rgba(0,245,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,245,255,.035) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+header {
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 7%;
+  background:rgba(7,9,20,.9);
+  border-bottom:1px solid rgba(0,245,255,.2);
+  backdrop-filter:blur(15px);
+}
+
+.logo {
+  font-family:Orbitron,sans-serif;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:4px;
+  color:var(--cyan);
+  text-shadow:0 0 15px var(--cyan);
+}
+
+.logo span { color:white; }
+
+nav { display:flex; gap:25px; }
+
+nav a {
+  text-decoration:none;
+  color:#b8c5d8;
+  font-size:13px;
+  transition:.3s;
+}
+
+nav a:hover { color:var(--cyan); }
+
+.hero {
+  min-height:620px;
+  display:flex;
+  align-items:center;
+  padding:80px 9%;
+  position:relative;
+  z-index:1;
+}
+
+.hero-content { max-width:780px; }
+
+.tag {
+  color:var(--green);
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:25px;
+}
+
+h1 {
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(42px,7vw,82px);
+  line-height:1.12;
+  margin-bottom:25px;
+}
+
+h1 span {
+  color:var(--cyan);
+  text-shadow:0 0 25px rgba(0,245,255,.5);
+}
+
+.hero p {
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.8;
+  max-width:620px;
+}
+
+.actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-top:35px;
+}
+
+.btn {
+  border:1px solid var(--cyan);
+  background:transparent;
+  color:var(--cyan);
+  padding:14px 24px;
+  text-decoration:none;
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:1px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn.primary {
+  background:var(--cyan);
+  color:#050914;
+  font-weight:bold;
+}
+
+.btn:hover {
+  box-shadow:0 0 25px rgba(0,245,255,.35);
+  transform:translateY(-3px);
+}
+
+section {
+  position:relative;
+  z-index:1;
+  padding:75px 7%;
+}
+
+.section-title {
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(23px,4vw,34px);
+  margin-bottom:12px;
+}
+
+.section-sub {
+  color:var(--muted);
+  margin-bottom:35px;
+  line-height:1.7;
+}
+
+.accent { color:var(--cyan); }
+
+.panel {
+  background:linear-gradient(145deg,#121b30,#0b1020);
+  border:1px solid rgba(0,245,255,.19);
+  border-radius:12px;
+  padding:24px;
+  box-shadow:0 10px 40px rgba(0,0,0,.25);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+
+.metric-label {
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.metric-value {
+  font-family:Orbitron,sans-serif;
+  font-size:29px;
+  margin-top:15px;
+  color:var(--cyan);
+}
+
+.metric-note {
+  color:var(--muted);
+  font-size:11px;
+  margin-top:10px;
+}
+
+.status-dot {
+  display:inline-block;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
+  margin-right:8px;
+}
+
+.dashboard-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:20px;
+}
+
+.sensor {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.sensor h3 {
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+  margin-bottom:9px;
+}
+
+.sensor p { color:var(--muted); font-size:12px; }
+
+.sensor-value {
+  font-family:Orbitron,sans-serif;
+  color:var(--cyan);
+  font-size:27px;
+}
+
+.status-pill {
+  display:inline-block;
+  border-radius:20px;
+  padding:6px 12px;
+  font-size:10px;
+  font-weight:bold;
+  background:rgba(57,255,156,.12);
+  color:var(--green);
+}
+
+.warning {
+  background:rgba(255,69,102,.12);
+  color:var(--red);
+}
+
+.control-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+select {
+  padding:10px;
+  background:#101629;
+  color:white;
+  border:1px solid var(--cyan);
+  border-radius:5px;
+}
+
+.log {
+  max-height:220px;
+  overflow:auto;
+  font-family:monospace;
+  font-size:12px;
+}
+
+.log-entry {
+  padding:12px 5px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  color:#b8c5d8;
+}
+
+.features {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.feature h3 {
+  color:var(--cyan);
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+  margin-bottom:12px;
+}
+
+.feature p {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+}
+
+footer {
+  position:relative;
+  z-index:1;
+  text-align:center;
+  padding:35px 15px;
+  border-top:1px solid rgba(0,245,255,.2);
+  color:var(--muted);
+  font-size:12px;
+  line-height:2;
+}
+
+@media(max-width:850px) {
+  .grid { grid-template-columns:repeat(2,1fr); }
+  .features { grid-template-columns:1fr; }
+}
+
+@media(max-width:600px) {
+  header { padding:16px 5%; }
+  nav { gap:12px; }
+  nav a { font-size:10px; }
+  .logo { font-size:19px; }
+  .hero { min-height:530px; padding:65px 7%; }
+  .grid,.dashboard-grid { grid-template-columns:1fr; }
+  section { padding:55px 6%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">VEX<span>TRON</span></div>
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#dashboard">DASHBOARD</a>
+    <a href="#features">FEATURES</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="tag">NEXT GENERATION INDUSTRIAL TECHNOLOGY</div>
+    <h1>INTELLIGENT<br><span>AUTOMATION.</span></h1>
+    <p>
+      VEXTRON is an embedded industrial monitoring prototype
+      designed to detect objects, monitor restricted zones,
+      estimate movement speed and provide real-time alerts.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#dashboard">OPEN SYSTEM</a>
+      <a class="btn" href="#features">EXPLORE TECHNOLOGY</a>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard">
+  <div class="section-title">SYSTEM <span class="accent">COMMAND CENTER</span></div>
+  <p class="section-sub">Live monitoring interface for the VEXTRON ESP32 prototype.</p>
+
+  <div class="control-row">
+    <div>
+      <span class="status-dot" id="connectionDot"></span>
+      <span id="connectionText">DEMO MODE ACTIVE</span>
+    </div>
+
+    <select id="mode" onchange="changeMode()">
+      <option value="demo">DEMO MODE</option>
+      <option value="live">ESP32 LIVE MODE</option>
+    </select>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="metric-label">Objects detected</div>
+      <div class="metric-value" id="count">128</div>
+      <div class="metric-note">Total passage count</div>
+    </div>
+
+    <div class="panel">
+      <div class="metric-label">Object speed</div>
+      <div class="metric-value"><span id="speed">0.45</span> m/s</div>
+      <div class="metric-note">Estimated movement speed</div>
+    </div>
+
+    <div class="panel">
+      <div class="metric-label">Movement direction</div>
+      <div class="metric-value" id="direction">A → B</div>
+      <div class="metric-note">Based on sensor sequence</div>
+    </div>
+
+    <div class="panel">
+      <div class="metric-label">System status</div>
+      <div class="metric-value" id="systemStatus">NORMAL</div>
+      <div class="metric-note">Prototype monitoring state</div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="panel sensor">
+      <div>
+        <h3>SENSOR ALPHA</h3>
+        <p>Detection point A</p>
+        <p id="aState">OBJECT NOT DETECTED</p>
+      </div>
+      <div class="sensor-value"><span id="aDistance">42.5</span> cm</div>
+    </div>
+
+    <div class="panel sensor">
+      <div>
+        <h3>SENSOR BETA</h3>
+        <p>Detection point B</p>
+        <p id="bState">OBJECT NOT DETECTED</p>
+      </div>
+      <div class="sensor-value"><span id="bDistance">38.2</span> cm</div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="panel">
+      <div class="metric-label">Safety alarm</div>
+      <div style="margin-top:18px">
+        <span class="status-pill" id="alarmStatus">ALARM INACTIVE</span>
+      </div>
+      <p class="metric-note" style="margin-top:15px">
+        Alarm state reported by the ESP32 controller.
+      </p>
+    </div>
+
+    <div class="panel">
+      <div class="metric-label">Controller state</div>
+      <div style="margin-top:18px">
+        <span class="status-pill" id="armedStatus">SYSTEM ARMED</span>
+      </div>
+      <p class="metric-note" style="margin-top:15px">
+        Controller monitoring state.
+      </p>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:20px">
+    <div class="control-row">
+      <div class="metric-label">EVENT ACTIVITY LOG</div>
+      <button class="btn" onclick="clearLog()">CLEAR LOG</button>
+    </div>
+    <div class="log" id="eventLog">
+      <div class="log-entry">[SYSTEM] VEXTRON interface initialized.</div>
+      <div class="log-entry">[INFO] Waiting for sensor updates.</div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="section-title">CORE <span class="accent">TECHNOLOGY</span></div>
+  <p class="section-sub">Intelligent monitoring features of the VEXTRON prototype.</p>
+
+  <div class="features">
+    <div class="panel feature">
+      <h3>01 / OBJECT DETECTION</h3>
+      <p>Dual ultrasonic sensors monitor two detection points and identify object movement.</p>
+    </div>
+
+    <div class="panel feature">
+      <h3>02 / SPEED ESTIMATION</h3>
+      <p>Movement speed can be estimated using sensor spacing and the time difference between detections.</p>
+    </div>
+
+    <div class="panel feature">
+      <h3>03 / SAFETY ALERTS</h3>
+      <p>ESP32-based warning logic reports proximity and alarm conditions to the dashboard.</p>
+    </div>
+
+    <div class="panel feature">
+      <h3>04 / LIVE MONITORING</h3>
+      <p>Monitor sensor distances, controller state and system events through a web interface.</p>
+    </div>
+
+    <div class="panel feature">
+      <h3>05 / EVENT TRACKING</h3>
+      <p>View changes in object count, direction, speed and alarm state during operation.</p>
+    </div>
+
+    <div class="panel feature">
+      <h3>06 / EMBEDDED CONTROL</h3>
+      <p>ESP32 provides the connection between sensors, alarm hardware and the monitoring interface.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="logo">VEXTRON</div>
+  SENSE • ANALYZE • PROTECT<br>
+  Intelligent Embedded Automation Prototype<br>
+  © 2026 VEXTRON PROJECT
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+let demoCount = 128;
+let previousAlarm = false;
+let previousStatus = "";
+
+function addLog(message) {
+  const log = $("eventLog");
+  const entry = document.createElement("div");
+  entry.className = "log-entry";
+  entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+  log.prepend(entry);
+
+  while(log.children.length > 30) {
+    log.removeChild(log.lastChild);
+  }
+}
+
+function clearLog() {
+  $("eventLog").replaceChildren();
+  addLog("Event history cleared.");
+}
+
+function showData(data) {
+  $("aDistance").textContent = Number(data.a ?? 0).toFixed(1);
+  $("bDistance").textContent = Number(data.b ?? 0).toFixed(1);
+  $("speed").textContent = Number(data.speed ?? 0).toFixed(2);
+  $("count").textContent = data.count ?? 0;
+  $("direction").textContent = data.direction ?? "--";
+
+  $("aState").textContent = data.aDetected
+    ? "OBJECT DETECTED" : "NO OBJECT DETECTED";
+
+  $("bState").textContent = data.bDetected
+    ? "OBJECT DETECTED" : "NO OBJECT DETECTED";
+
+  $("systemStatus").textContent = data.status ?? "UNKNOWN";
+
+  $("alarmStatus").textContent = data.alarm
+    ? "ALARM ACTIVE" : "ALARM INACTIVE";
+
+  $("alarmStatus").className = data.alarm
+    ? "status-pill warning" : "status-pill";
+
+  $("armedStatus").textContent = data.armed
+    ? "SYSTEM ARMED" : "SYSTEM DISARMED";
+
+  $("armedStatus").className = data.armed
+    ? "status-pill" : "status-pill warning";
+
+  if(Boolean(data.alarm) !== previousAlarm) {
+    addLog(data.alarm ? "WARNING: ALARM ACTIVE" : "Alarm returned to inactive state.");
+    previousAlarm = Boolean(data.alarm);
+  }
+
+  if(data.status && data.status !== previousStatus) {
+    addLog("System status: " + data.status);
+    previousStatus = data.status;
+  }
+}
+
+function demoUpdate() {
+  const a = 20 + Math.random() * 65;
+  const b = 20 + Math.random() * 65;
+  const detectedA = a < 50;
+  const detectedB = b < 50;
+  const alarm = a < 20 || b < 20;
+
+  demoCount += Math.random() > 0.88 ? 1 : 0;
+
+  showData({
+    a, b,
+    speed: Math.random() * 1.2,
+    count: demoCount,
+    direction: detectedA ? "A → B" : detectedB ? "B → A" : "--",
+    aDetected: detectedA,
+    bDetected: detectedB,
+    armed: true,
+    alarm,
+    status: alarm ? "WARNING" : "NORMAL"
+  });
+
+  $("connectionText").textContent = "DEMO MODE ACTIVE";
+  $("connectionDot").style.background = "var(--green)";
+}
+
+async function liveUpdate() {
+  try {
+    const response = await fetch("/api/status", {
+      cache:"no-store"
+    });
+
+    if(!response.ok) throw new Error("HTTP " + response.status);
+
+    const data = await response.json();
+    showData(data);
+
+    $("connectionText").textContent = "ESP32 CONNECTED";
+    $("connectionDot").style.background = "var(--green)";
+  } catch(error) {
+    $("connectionText").textContent = "ESP32 CONNECTION LOST";
+    $("connectionDot").style.background = "var(--red)";
+  }
+}
+
+function changeMode() {
+  previousAlarm = false;
+  previousStatus = "";
+
+  if($("mode").value === "demo") {
+    addLog("Demo mode enabled.");
+    demoUpdate();
+  } else {
+    addLog("Attempting ESP32 connection...");
+    liveUpdate();
+  }
+}
+
+setInterval(() => {
+  if($("mode").value === "demo") {
+    demoUpdate();
+  } else {
+    liveUpdate();
+  }
+}, 1000);
+
+demoUpdate();
+</script>
+
+</body>
+</html>
+
